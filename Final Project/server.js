@@ -1,9 +1,9 @@
 //! Requiring modules  --  START
-var Grass = require("./modules/grass.js");
-var GrassEater = require("./modules/grassEater.js");
-var Predator = require("./modules/predator.js");
-var Man = require("./modules/man.js");
-var Killer = require("./modules/killer.js");
+var Grass = require("./modules/Grass.js");
+var GrassEater = require("./modules/GrassEater.js");
+var Predator = require("./modules/Predator.js");
+var Man = require("./modules/Man.js");
+var Killer = require("./modules/Killer.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -155,8 +155,8 @@ function game() {
         grassCounter: grassHashiv,
         grassLiveCounter: grassArr.length,
         grassEaterCounter: grassEaterHashiv,
-        huntCounter: huntHashiv,
         predatorCounter: predatorHashiv,
+        manCounter: manHashiv,
         killerCounter: killerHashiv,
         weather: weather
     }

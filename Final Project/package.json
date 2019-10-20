@@ -4,6 +4,7 @@
   "main": "class.js",
   "dependencies": {
     "express": "^4.17.0",
+    "form": "^0.2.4",
     "socket.io": "^2.2.0"
   },
   "scripts": {
