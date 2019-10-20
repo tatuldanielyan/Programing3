@@ -60,7 +60,7 @@ function matrixGenerator(matrixSize, grass, grasseater, predator, man, killer) {
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(40, 700, 30, 46, 40, 15);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START

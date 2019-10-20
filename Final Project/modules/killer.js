@@ -4,7 +4,7 @@ var random = require("./random");
 module.exports = class Killer extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.multiply = 0;
+        this.energy2 = 0;
     }
     getNewCoordinates() {
         this.directions = [

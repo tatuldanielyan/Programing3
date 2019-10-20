@@ -4,7 +4,7 @@ var random = require("./random");
 module.exports = class GrassEater extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.multiply = 0;
+        this.life = 0;
     }
     getNewCoordinates() {
         this.directions = [
