@@ -118,7 +118,7 @@ function game() {
         weather = "summer"
     }else if (exanak <= 20){
         weather = "autumn"
-    }else if (exanak > 20){
+    } else if (exanak <= 20) {
         exanak = 0
     }
 
