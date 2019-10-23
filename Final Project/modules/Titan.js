@@ -1,10 +1,10 @@
 var LiveForm = require("./LiveForm");
 var random = require("./random");
 
-module.exports = class Killer extends LiveForm {
+module.exports = class Titan extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.energy2 = 120;
+        this.energy3 = 120;
     }
     getNewCoordinates() {
         this.directions = [
@@ -28,16 +28,16 @@ module.exports = class Killer extends LiveForm {
             let x = newCell[0];
             let y = newCell[1];
 
-            matrix[y][x] = 5;
+            matrix[y][x] = 6;
 
-            let killer = new Killer(x, y);
-            killerArr.push(killer);
+            let titan = new Titan(x, y);
+            titanArr.push(titan);
 
-            this.energy2 = 40;
+            this.energy3 = 40;
         }
     }
     eat() {
-        let emptyCells = this.chooseCell(4);
+        let emptyCells = this.chooseCell(5);
         let newCell = random(emptyCells);
 
         if (newCell) {
@@ -45,19 +45,19 @@ module.exports = class Killer extends LiveForm {
             let x = newCell[0];
             let y = newCell[1];
 
-            matrix[y][x] = 5;
+            matrix[y][x] = 6;
             matrix[this.y][this.x] = 0;
 
-            for (let i in manArr) {
-                if (manArr[i].x == x && manArr[i].y == y) {
-                    manArr.splice(i, 1)
+            for (let i in titanArr) {
+                if (titanArr[i].x == x && titanArr[i].y == y) {
+                    titanArr.splice(i, 1)
                 }
             }
 
             this.x = x;
             this.y = y;
 
-            if (this.energy2 >= 123) {
+            if (this.energy3 >= 123) {
                 this.mul();
             }
         } else {
@@ -65,7 +65,7 @@ module.exports = class Killer extends LiveForm {
         }
     }
     move() {
-        this.energy2--;
+        this.energy3--;
 
         let emptyCells = this.chooseCell(0, 1);
         let newCell = random(emptyCells);
@@ -74,7 +74,7 @@ module.exports = class Killer extends LiveForm {
             let x = newCell[0];
             let y = newCell[1];
 
-            matrix[y][x] = 5;
+            matrix[y][x] = 6;
             matrix[this.y][this.x] = 0;
 
             for (let i in grassArr) {
@@ -86,7 +86,7 @@ module.exports = class Killer extends LiveForm {
             this.y = y;
             this.x = x;
         }
-        if (this.energy2 < 0) {
+        if (this.energy3 < 0) {
             this.die();
         }
 
@@ -94,9 +94,9 @@ module.exports = class Killer extends LiveForm {
     die() {
         matrix[this.y][this.x] = 0;
 
-        for (let i in killerArr) {
-            if (killerArr[i].x == this.x && killerArr[i].y == this.y) {
-                killerArr.splice(i, 1)
+        for (let i in titanArr) {
+            if (titanArr[i].x == this.x && titanArr[i].y == this.y) {
+                titanArr.splice(i, 1)
             }
         }
     }

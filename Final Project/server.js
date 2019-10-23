@@ -4,6 +4,7 @@ var GrassEater = require("./modules/GrassEater.js");
 var Predator = require("./modules/Predator.js");
 var Man = require("./modules/Man.js");
 var Killer = require("./modules/Killer.js");
+var Titan = require("./modules/Titan.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -13,6 +14,7 @@ grassEaterArr = [];
 predatorArr = [];
 manArr = [];
 killerArr = [];
+titanArr = [];
 matrix = [];
 //! Initializing global arrays  --  END
 
@@ -22,12 +24,13 @@ grassEaterHashiv = 0;
 predatorHashiv = 0;
 manHashiv = 0;
 killerHashiv = 0;
+titanHashiv = 0;
 // statistics end
 
 // time = 0
 //! Creating MATRIX -- START
 
-function matrixGenerator(matrixSize, grass, grasseater, predator, man, killer) {
+function matrixGenerator(matrixSize, grass, grasseater, predator, man, killer, titan) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -59,8 +62,14 @@ function matrixGenerator(matrixSize, grass, grasseater, predator, man, killer) {
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 5;
     }
+    for (let i = 0; i < titan; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 6;
+    }
 }
-matrixGenerator(40, 700, 30, 46, 40, 15);
+matrixGenerator(40, 700, 30, 46, 40, 15, 10);
+
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START
@@ -102,24 +111,34 @@ function creatingObjects() {
                 killerArr.push(killer);
                 killerHashiv++
             }
+            else if (matrix[y][x] == 6) {
+                var titan = new Titan(x, y);
+                titanArr.push(titan);
+                titanHashiv++
+            }
         }
     }
 }
 
 creatingObjects();
 
-let exanak = 0;
-let weather = "winter"
+let exanak = -10;
+let weather = "spring"
 
 function game() {
 
     exanak++;
-    if (exanak <= 10){
+    if (exanak <= 0) {
+        weather = "spring"
+
+    } else if (exanak <= 10) {
         weather = "summer"
-    }else if (exanak <= 20){
-        weather = "autumn"
     } else if (exanak <= 20) {
-        exanak = 0
+        weather = "autumn"
+    } else if (exanak <= 30) {
+        weather = "winter"
+    } else if (exanak > 30) {
+        exanak = -10;
     }
 
 
@@ -130,36 +149,47 @@ function game() {
     }
     if (grassEaterArr[0] !== undefined) {
         for (var i in grassEaterArr) {
-          grassEaterArr[i].eat();
+            grassEaterArr[i].eat();
         }
     }
     if (predatorArr[0] !== undefined) {
         for (var i in predatorArr) {
-          predatorArr[i].eat();
+            predatorArr[i].eat();
         }
     }
     if (manArr[0] !== undefined) {
         for (var i in manArr) {
-          manArr[i].eat();
+            manArr[i].eat();
         }
     }
     if (killerArr[0] !== undefined) {
         for (var i in killerArr) {
-          killerArr[i].eat();
+            killerArr[i].eat();
+        }
+        if (titanArr[0] !== undefined) {
+            for (var i in titanArr) {
+                titanArr[i].eat();
+            }
         }
     }
 
-    //! Object to send
-    let sendData = {
-        matrix: matrix,
-        grassCounter: grassHashiv,
-        grassLiveCounter: grassArr.length,
-        grassEaterCounter: grassEaterHashiv,
-        predatorCounter: predatorHashiv,
-        manCounter: manHashiv,
-        killerCounter: killerHashiv,
-        weather: weather
-    }
+        //! Object to send
+        let sendData = {
+            matrix: matrix,
+            grassCounter: grassHashiv,
+            grassLiveCounter: grassArr.length,
+            grassEaterCounter: grassEaterHashiv,
+            grassEaterLiveCounter: grassEaterArr.length,
+            predatorCounter: predatorHashiv,
+            predatorLiveCounter: predatorArr.length,
+            manCounter: manHashiv,
+            manLiveCounter: manArr.length,
+            killerCounter: killerHashiv,
+            killerLiveCounter: killerArr.length,
+            titanCounter: titanHashiv,
+            titanLiveCounter: titanArr.length,
+            weather: weather
+        }
 
     //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
