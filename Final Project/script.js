@@ -63,34 +63,74 @@ function setup() {
                     if (data.weather == "spring") {
                         fill("green");
                     } else if (data.weather == "summer") {
-                        fill("#99ff33");
+                        fill("#00b300");
                     } else if (data.weather == "autumn") {
-                        fill("yellow");
+                        fill("#004d00");
                     }
                     else if (data.weather == "winter") {
-                        fill("#white");
+                        fill("white");
                     }
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 2) {
-                    fill("orange");
-                    rect(j * side, i * side, side, side);
+                    if (data.weather == "spring") {
+                        fill("orange");
+                    } else if (data.weather == "summer") {
+                        fill("#ffaf1a");
+                    } else if (data.weather == "autumn") {
+                        fill("#e69500");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#ffc14d");
+                    }
                 } else if (matrix[i][j] == 0) {
                     fill('#acacac');
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 3) {
-                    fill('red');
-                    rect(j * side, i * side, side, side);
+                    if (data.weather == "spring") {
+                        fill("red");
+                    } else if (data.weather == "summer") {
+                        fill("#ff1a1a");
+                    } else if (data.weather == "autumn") {
+                        fill("#cc0000");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#ff3333");
+                    }
                 } else if (matrix[i][j] == 4) {
-                    fill('ffe683');
-                    rect(j * side, i * side, side, side);
+                    if (data.weather == "spring") {
+                        fill("blue");
+                    } else if (data.weather == "summer") {
+                        fill("#1a1aff");
+                    } else if (data.weather == "autumn") {
+                        fill("#000099");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#3333ff");
+                    }
                 } else if (matrix[i][j] == 5) {
-                    fill('black');
-                    rect(j * side, i * side, side, side);
+                    if (data.weather == "spring") {
+                        fill("black");
+                    } else if (data.weather == "summer") {
+                        fill("#1a1a1a");
+                    } else if (data.weather == "autumn") {
+                        fill("#333333");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#404040");
+                    }
                 }
                 else if (matrix[i][j] == 6) {
-                    fill('#ff00ff');
-                    rect(j * side, i * side, side, side);
+                    if (data.weather == "spring") {
+                        fill("#cc33ff");
+                    } else if (data.weather == "summer") {
+                        fill("#d24dff");
+                    } else if (data.weather == "autumn") {
+                        fill("#ac00e6");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#d966ff");
+                    }
+                    
                 }
+                rect(j * side, i * side, side, side);
             }
         }
     }

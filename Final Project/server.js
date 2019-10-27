@@ -166,12 +166,13 @@ function game() {
         for (var i in killerArr) {
             killerArr[i].eat();
         }
+    }
         if (titanArr[0] !== undefined) {
             for (var i in titanArr) {
                 titanArr[i].eat();
             }
         }
-    }
+    
 
         //! Object to send
         let sendData = {
@@ -197,4 +198,4 @@ function game() {
 
 
 
-setInterval(game, 1000)
+setInterval(game, 500)

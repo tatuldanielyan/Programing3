@@ -9,8 +9,12 @@ module.exports = class Titan extends LiveForm {
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
     }
@@ -33,7 +37,7 @@ module.exports = class Titan extends LiveForm {
             let titan = new Titan(x, y);
             titanArr.push(titan);
 
-            this.energy3 = 40;
+            this.energy3 = 120;
         }
     }
     eat() {
@@ -48,16 +52,16 @@ module.exports = class Titan extends LiveForm {
             matrix[y][x] = 6;
             matrix[this.y][this.x] = 0;
 
-            for (let i in titanArr) {
-                if (titanArr[i].x == x && titanArr[i].y == y) {
-                    titanArr.splice(i, 1)
+            for (let i in killerArr) {
+                if (killerArr[i].x == x && killerArr[i].y == y) {
+                    killerArr.splice(i, 1)
                 }
             }
 
             this.x = x;
             this.y = y;
 
-            if (this.energy3 >= 123) {
+            if (this.energy3 >= 121) {
                 this.mul();
             }
         } else {
